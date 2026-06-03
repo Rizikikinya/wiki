@@ -1,6 +1,7 @@
 from django.shortcuts import redirect, render
 from django.http import HttpResponse
 import random
+import markdown2
 
 from . import util
 
@@ -11,6 +12,7 @@ def index(request):
     })
 def entry(request, title):
     entry = util.get_entry(title)
+    entry=markdown2.markdown(entry)
 
     if entry is None:
         return HttpResponse("Entry not found")
